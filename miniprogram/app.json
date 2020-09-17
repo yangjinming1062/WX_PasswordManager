@@ -1,0 +1,15 @@
+{
+  "pages": [
+    "pages/Login/Login",
+    "pages/Main/Main",
+    "pages/AboutMe/AboutMe"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#000",
+    "navigationBarTitleText": "密码保险柜",
+    "navigationBarTextStyle": "white"
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}

@@ -1,0 +1,138 @@
+<image src="../../images/background.jpg" style="width:100%;height:100%;position:fixed;top:0"></image>
+<view class="container">
+  <view class="weui-tab" data-weui-theme="{{theme}}">
+			<view wx:if="{{IsShowJL}}" class="weui-tab__panel">
+			<view class="weui-cells__group weui-cells__group_form">
+				<view class="weui-cells__title">添加保管记录</view>
+					<view class="weui-cells weui-cells_form">
+						<view class="weui-cell weui-cell_active">
+							<view class="weui-cell__hd"><label class="weui-label">应用</label></view>
+							<view class="weui-cell__bd">
+								<input class="weui-input" type="text" id="txtApp" value="{{App}}" bindinput="inputTyping" placeholder="如QQ、Github" placeholder-class="weui-input__placeholder" />
+							</view>
+						</view>
+						<view class="weui-cell weui-cell_active">
+							<view class="weui-cell__hd"><label class="weui-label">账号</label></view>
+							<view class="weui-cell__bd">
+								<input class="weui-input" type="text" id="txtID" value="{{ID}}" bindinput="inputTyping" placeholder="填写对应账号" placeholder-class="weui-input__placeholder" />
+							</view>
+						</view>
+						<view class="weui-cell weui-cell_active">
+							<view class="weui-cell__hd"><label class="weui-label">手机</label></view>
+							<view class="weui-cell__bd">
+								<input class="weui-input" type="text" id="txtPhone" value="{{Phone}}" bindinput="inputTyping" placeholder="（可选）绑定的手机" placeholder-class="weui-input__placeholder" />
+							</view>
+						</view>
+						<view class="weui-cell weui-cell_active">
+							<view class="weui-cell__hd"><label class="weui-label">邮箱</label></view>
+							<view class="weui-cell__bd">
+								<input class="weui-input" type="text" id="txtEmail" value="{{Email}}" bindinput="inputTyping" placeholder="（可选）绑定的邮箱" placeholder-class="weui-input__placeholder" />
+							</view>
+						</view>
+						<view class="weui-cell weui-cell_active">
+							<view class="weui-cell__hd"><label class="weui-label">密码</label></view>
+							<view class="weui-cell__bd">
+								<input class="weui-input" type="text" id="txtPass" value="{{Password}}" bindinput="inputTyping" placeholder="填写对应密码" placeholder-class="weui-input__placeholder" />
+							</view>
+						</view>
+						<view class="weui-cell weui-cell_active">
+							<view class="weui-cell__hd"><label class="weui-label">其他</label></view>
+							<view class="weui-cell__bd">
+								<input class="weui-input" type="text" id="txtOther" value="{{Other}}" bindinput="inputTyping" placeholder="（可选）任意想要记录的内容" placeholder-class="weui-input__placeholder" />
+							</view>
+						</view>
+						<view class="button-sp-area" style="margin-left:150rpx">
+							<a class="weui-btn weui-btn_mini weui-btn_warn" bindtap="ClearRecord">重新填写</a>
+							<a class="weui-btn weui-btn_mini weui-btn_default" style="margin-left:100rpx" bindtap="SaveRecord">计入本地</a>
+						</view>
+					</view>
+			</view>
+				<view style="position:fixed;bottom:200rpx;" wx:if="{{ShowYunOps && ForShowArray.length>0&&secretKey.length>0}}">
+					<button class="weui-btn weui-btn_primary" bindtap="onAdd"><i class="weui-loading" wx:if="{{IsUploading}}"></i>上传云端</button>
+			 		<view class="weui-media-box__desc">说明：上传全部记录，非针对当前一条上传</view>
+				</view>
+			</view>
+			<view wx:if="{{IsShowDQ}}" class="weui-tab__panel">
+				<view class="page__bd" style="width:750rpx">
+					<view class="weui-search-bar {{inputShowed ? 'weui-search-bar_focusing' : ''}}" id="searchBar">
+						<form class="weui-search-bar__form">
+							<view class="weui-search-bar__box">
+								<i class="weui-icon-search"></i>
+								<input type="text" class="weui-search-bar__input" placeholder="应用/账号" id="txtSearch" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping"/>
+								<span class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput"></span>
+							</view>
+							<label class="weui-search-bar__label" bindtap="showInput">
+								<i class="weui-icon-search"></i>
+								<span class="weui-search-bar__text">搜索</span>
+							</label>
+						</form>
+						<view class="weui-search-bar__cancel-btn" bindtap="hideInput">取消</view>
+					</view>
+				</view>
+				<view wx:if="{{columnShow}}">
+					<forshow wx:for="{{ForShowArray}}" theme="{{theme == 'dark'? 'white':'black'}}" wx:key="keyword" ShowPassword="{{ShowPassword}}" item="{{item}}" bindDel="delTap" bindMod="modTap"></forshow>
+				</view>
+				<view wx:else>
+				<swiper class="swiperSS" indicator-dots="true" indicator-color="black" indicator-active-color="white">
+					<swiper-item wx:for="{{ForShowArray}}" wx:key="keyword">
+						<forshow ShowPassword="{{ShowPassword}}" theme="{{theme == 'dark'? 'white':'black'}}" item="{{item}}" bindDel="delTap"></forshow>
+					</swiper-item>
+				</swiper>
+				</view>
+				<view style="position:fixed;bottom:200rpx;" wx:if="{{ShowYunOps && secretKey.length>0}}">
+					<button class="weui-btn weui-btn_primary" bindtap="onQuery"><i class="weui-loading" wx:if="{{IsUploading}}"></i>读取云端</button>
+					<view class="weui-media-box__desc">说明：读取云端全部记录</view>
+				</view>
+			</view>
+			<view wx:if="{{IsShowSM}}" class="weui-tab__panel">
+				<view class="weui-cells__group weui-cells__group_form">
+					<view class="weui-cells__title">个性化设置</view>
+						<view class="weui-cells weui-cells_form">
+							<view class="weui-cell weui-cell_active">
+								<view class="weui-cell__hd"><label class="weui-label">密钥</label></view>
+								<view class="weui-cell__bd">
+								<input class="weui-input" type="text" id="txtKey" value="{{secretKey}}"
+								bindinput="inputTyping" placeholder="加/解密密钥" placeholder-class="weui-input__placeholder" />
+								</view>
+							</view>
+							<view class="weui-cell weui-cell_active">
+								<view class="weui-cell__hd"><label class="weui-label">明文密码</label></view>
+								<view class="weui-cell__ft">
+                    <switch checked="{{ShowPassword}}" id="mwmm" bindchange="changeSwitch"/>
+                </view>
+							</view>
+							<view class="weui-cell weui-cell_active">
+								<view class="weui-cell__hd"><label class="weui-label">竖列显示</label></view>
+								<view class="weui-cell__ft">
+                    <switch checked="{{columnShow}}" id="slxs" bindchange="changeSwitch"/>
+                </view>
+							</view>
+							<view class="weui-cell weui-cell_active">
+								<view class="weui-cell__hd"><label class="weui-label">明亮主题</label></view>
+								<view class="weui-cell__ft">
+                    <switch checked="{{theme == 'light'}}" id="mlzt" bindchange="changeSwitch"/>
+                </view>
+							</view>
+						</view>
+				</view>
+				<view style="position:fixed;bottom:200rpx;" wx:if="{{ShowYunOps}}">
+					<button class="weui-btn weui-btn_primary" bindtap="onRemove"><i class="weui-loading" wx:if="{{IsUploading}}"></i>删除云端</button>
+					<view class="weui-media-box__desc">说明：分手吧，把我的数据删掉</view>
+				</view>
+			</view>
+			<view class="weui-tabbar" hidden="{{HiddenBar}}">
+				<view class="weui-tabbar__item {{IsShowJL ? 'weui-bar__item_on' : ''}}">
+					<image src="../../images/TX.png" alt class="weui-tabbar__icon" bindtap="JLtap"></image>
+					<view class="weui-tabbar__label" bindtap="JLtap">填写</view>
+				</view>
+				<view class="weui-tabbar__item {{IsShowDQ ? 'weui-bar__item_on' : ''}}">
+					<image src="../../images/DQ.png" alt class="weui-tabbar__icon" bindtap="DQtap"></image>
+					<view class="weui-tabbar__label" bindtap="DQtap">读取</view>
+				</view>
+				<view class="weui-tabbar__item {{IsShowSM ? 'weui-bar__item_on' : ''}}">
+					<image src="../../images/SZ.png" alt class="weui-tabbar__icon" bindtap="SMtap"></image>
+					<view class="weui-tabbar__label" bindtap="SMtap">设置</view>
+				</view>
+			</view>
+		</view>
+</view>

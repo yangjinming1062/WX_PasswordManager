@@ -1,0 +1,20 @@
+<image src="../../images/bg2s1.gif" style="width:100%;height:100%;position:fixed;top:0;z-index: 0"></image>
+<view class="container">
+  <view class="userinfo" data-weui-theme="dark">
+    <button 
+      open-type="getUserInfo" 
+      bindgetuserinfo="onGetUserInfo"
+      bindtap="onGetOpenid"
+      class="userinfo-avatar"
+      style="background-image: url({{avatarUrl}})"
+      size="default"
+    ></button>
+    <view>
+      <button class="weui-btn weui-btn_primary" open-type="getUserInfo"  bindgetuserinfo="onGetUserInfo" bindtap="onGetOpenid">
+      <i class="weui-loading" wx:if="{{IsIntoboxing}}"></i>进入保险柜</button>
+      <button class="weui-btn weui-btn_default" bindtap="offLine">离线使用</button>
+    </view>
+    <button class="weui-btn weui-btn_default" bindtap="openAbout" style="position:fixed;bottom:150rpx">关于~</button>
+  </view>
+  <view bindtap="Egg" class="weui-form__tips" data-weui-theme="dark" style="position:fixed;bottom:52rpx;">联系作者： {{Tel}}</view>
+</view>

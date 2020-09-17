@@ -1,0 +1,6 @@
+/* pages/ForShow/ForShow.wxss */
+.weui-form-preview{
+  margin-bottom:25px;
+  width: 100%;
+  /* background: transparent;*/
+}

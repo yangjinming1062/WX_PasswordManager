@@ -1,0 +1,40 @@
+<!--pages/ForShow/ForShow.wxml-->
+<view class="weui-form-preview">
+	<view class="weui-form-preview__hd">
+		<label class="weui-form-preview__label">账号平台</label>
+		<em class="weui-form-preview__value">{{item.App}}</em>
+	</view>
+	<view class="weui-form-preview__bd">
+		<view class="weui-form-preview__item">
+			<label class="weui-form-preview__label">账号</label>
+			<text class="weui-form-preview__value">{{item.ID}}</text>
+		</view>
+		<view class="weui-form-preview__item">
+			<label class="weui-form-preview__label">绑定手机</label>
+			<text class="weui-form-preview__value">{{item.Phone}}</text>
+		</view>
+		<view class="weui-form-preview__item">
+			<label class="weui-form-preview__label">绑定邮箱</label>
+			<text class="weui-form-preview__value">{{item.Email}}</text>
+		</view>
+		<view class="weui-form-preview__item">
+			<label class="weui-form-preview__label">密码</label>
+			<text class="weui-form-preview__value">{{ShowPassword ? item.Password:"******"}}</text>
+		</view>
+		<view class="weui-form-preview__item">
+			<label class="weui-form-preview__label">其他</label>
+			<text class="weui-form-preview__value">{{item.Other}}</text>
+		</view>
+	</view>
+	<view>
+		<view class="weui-form-preview__ft">
+			<a class="weui-form-preview__btn weui-form-preview__btn_default" style="color:{{theme}}" bindtap='copyIDTap'>复制账号</a>
+			<a class="weui-form-preview__btn weui-form-preview__btn_default" style="color:{{theme}}" bindtap='copyPwTap'>复制密码</a>
+		</view>
+		<view class="weui-form-preview__ft">
+			<a class="weui-form-preview__btn weui-form-preview__btn_primary" style="color:red" bindtap='DelTap'>删除记录</a>
+			<a class="weui-form-preview__btn weui-form-preview__btn_primary" style="color:green" bindtap='ModTap'>编辑修改</a>
+		</view>
+	</view>
+	<slot></slot>
+</view>
